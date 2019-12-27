@@ -8,17 +8,26 @@ memoryGame.picNum = memoryGame.rowNum * memoryGame.columnNum;
 
 memoryGame.start = () => {
     memoryGame.createCards();
-    memoryGame.newGame();
-    memoryGame.score();
+    memoryGame.createButton();
     memoryGame.imges();
+    memoryGame.score();
 };
-memoryGame.newGame = () => {
+memoryGame.createButton = () => {
     var button = $('<button/>');
     button.addClass('.buttunNew');
     button.text('New Game');
     $('#newGame').append(button);
-    // button.attr('click', )
+    button.click(memoryGame.newGame);
 }
+memoryGame.newGame = () =>{
+    $('#cardsBoard').empty();
+    memoryGame.createCards();
+    memoryGame.imges();
+    memoryGame.scoreNum = 0;
+    memoryGame.moves = 0;
+    memoryGame.score();
+
+} 
 memoryGame.score = () => {
     $('#score').text(`Moves: ${memoryGame.moves}, Matches: ${memoryGame.scoreNum}`)
 }
@@ -30,7 +39,7 @@ memoryGame.createCards = () => {
             newCard.addClass('card');
             newCard.addClass(`${counter}`);
             // .attr('click', memoryGame.clickCard);
-            
+
             $('#cardsBoard').append(newCard);
             counter++;
         };
@@ -58,19 +67,34 @@ memoryGame.imges = () => {
 var w = 0;
 memoryGame.clickCard = (event) => {
     memoryGame.moves++;
+    memoryGame.score();
     if (w == 2) {
-        if(x.src == y.src){
+        if (x.src == y.src) {
             memoryGame.scoreNum++;
-            // console.log(memoryGame.scoreNum);
-            
+            memoryGame.score();
+            if (memoryGame.scoreNum == 15) {
+                alert('You won!')
+            }
+            $(x).off('click');
+            $(y).off('click');
         }
-        // if()
-        $('img').css({ "opacity": "0" });
+        else {
+            x.style.opacity = '0'
+            y.style.opacity = '0'
+            $(x).click(memoryGame.clickCard);
+
+        }
         w = 0;
     };
     event.target.style.opacity = '1';
-    w == 1 ? x = event.target : y = event.target
     w++;
+    if (w == 1) {
+        x = event.target;
+        $(x).off('click');
+    }
+    else {
+        y = event.target
+    }
     // console.log(event.target.src);
 }
 
