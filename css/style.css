@@ -1,0 +1,46 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    text-align: center;
+}
+.nav{
+    display: flex;
+    margin-bottom: 20px;
+}
+.card{
+    border: 1px solid black;
+    width: 13vw;
+    height: 7vw;
+    margin: 5px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* opacity: 0; */
+}
+#cardsBoard{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90vw;
+    justify-content: center;
+}
+#newGame{
+    margin-right: 20vw;
+}
+button{
+    cursor: pointer;
+}
+img{
+    width: inherit;
+    height: inherit;
+    border: none;
+    /* opacity: 0; */
+}
