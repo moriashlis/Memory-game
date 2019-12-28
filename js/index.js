@@ -1,6 +1,6 @@
 const memoryGame = {};
-memoryGame.rowNum = 6;
-memoryGame.columnNum = 5;
+memoryGame.rowNum = 5;
+memoryGame.columnNum = 6;
 memoryGame.scoreNum = 0;
 memoryGame.moves = 0;
 memoryGame.picNum = memoryGame.rowNum * memoryGame.columnNum;
@@ -18,31 +18,25 @@ memoryGame.createButton = () => {
     button.text('New Game');
     $('#newGame').append(button);
     button.click(memoryGame.newGame);
-}
-memoryGame.newGame = () =>{
+};
+memoryGame.newGame = () => {
     $('#cardsBoard').empty();
-    memoryGame.createCards();
-    memoryGame.imges();
+    $('#newGame').empty();
     memoryGame.scoreNum = 0;
     memoryGame.moves = 0;
-    memoryGame.score();
-
-} 
+    memoryGame.start();
+};
 memoryGame.score = () => {
     $('#score').text(`Moves: ${memoryGame.moves}, Matches: ${memoryGame.scoreNum}`)
-}
+};
 memoryGame.createCards = () => {
     var counter = 0
-    for (let i = 0; i < memoryGame.columnNum; i++) {
-        for (let j = 0; j < memoryGame.rowNum; j++) {
-            var newCard = $('<div><img><div/>');
-            newCard.addClass('card');
-            newCard.addClass(`${counter}`);
-            // .attr('click', memoryGame.clickCard);
-
-            $('#cardsBoard').append(newCard);
-            counter++;
-        };
+    for (let i = 0; i < memoryGame.picNum; i++) {
+        var newCard = $('<div><img><div/>');
+        newCard.addClass('card');
+        newCard.addClass(`${counter}`);
+        $('#cardsBoard').append(newCard);
+        counter++;
     };
     $('img').click(memoryGame.clickCard);
     $('img').css({ "opacity": "0" });
@@ -56,7 +50,7 @@ memoryGame.imges = () => {
         while (arr.includes(x) === true) {
             x = Math.floor((Math.random() * memoryGame.picNum));
         }
-        if (y > 14) {
+        if (y >= memoryGame.picNum / 2) {
             y = 0;
         }
         $(`.${x} img`).attr("src", `./images/${y}.png`);
@@ -72,7 +66,7 @@ memoryGame.clickCard = (event) => {
         if (x.src == y.src) {
             memoryGame.scoreNum++;
             memoryGame.score();
-            if (memoryGame.scoreNum == 15) {
+            if (memoryGame.scoreNum == memoryGame.picNum / 2) {
                 alert('You won!')
             }
             $(x).off('click');
@@ -82,7 +76,6 @@ memoryGame.clickCard = (event) => {
             x.style.opacity = '0'
             y.style.opacity = '0'
             $(x).click(memoryGame.clickCard);
-
         }
         w = 0;
     };
@@ -95,7 +88,6 @@ memoryGame.clickCard = (event) => {
     else {
         y = event.target
     }
-    // console.log(event.target.src);
 }
 
 memoryGame.start();
