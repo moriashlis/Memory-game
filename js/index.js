@@ -62,15 +62,10 @@ memoryGame.clickCard = (event) => {
     memoryGame.moves++;
     memoryGame.score();
     if (w == 2) {
-        // console.log(x.src);
-        // console.log(y.src);
-        
-        if (x.src === y.src) {
-            // console.log('yes');
-            
+        if (x.src == y.src) {
             memoryGame.scoreNum++;
             memoryGame.score();
-            if (memoryGame.scoreNum == memoryGame.picNum / 2) {
+            if (memoryGame.scoreNum == 15) {
                 alert('You won!')
             }
             $(x).off('click');
@@ -80,7 +75,6 @@ memoryGame.clickCard = (event) => {
             x.style.opacity = '0'
             y.style.opacity = '0'
             $(x).click(memoryGame.clickCard);
-            $(y).click(memoryGame.clickCard);
         }
         w = 0;
     };
