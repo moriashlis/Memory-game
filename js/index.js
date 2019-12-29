@@ -8,20 +8,19 @@ memoryGame.picNum = memoryGame.rowNum * memoryGame.columnNum;
 
 memoryGame.start = () => {
     memoryGame.createCards();
-    memoryGame.createButton();
+    // memoryGame.createButton();
     memoryGame.imges();
     memoryGame.score();
 };
-memoryGame.createButton = () => {
-    var button = $('<button/>');
-    button.addClass('.buttunNew');
-    button.text('New Game');
-    $('#newGame').append(button);
-    button.click(memoryGame.newGame);
-};
+// memoryGame.createButton = () => {
+//     var button = $('<button/>');
+//     button.addClass('.buttunNew');
+//     button.text('New Game');
+//     $('#newGame').append(button);
+//     button.click(memoryGame.newGame);
+// };
 memoryGame.newGame = () => {
     $('#cardsBoard').empty();
-    $('#newGame').empty();
     memoryGame.scoreNum = 0;
     memoryGame.moves = 0;
     memoryGame.start();
@@ -63,7 +62,12 @@ memoryGame.clickCard = (event) => {
     memoryGame.moves++;
     memoryGame.score();
     if (w == 2) {
-        if (x.src == y.src) {
+        console.log(x.src);
+        console.log(y.src);
+        
+        if (x.src === y.src) {
+            console.log('yes');
+            
             memoryGame.scoreNum++;
             memoryGame.score();
             if (memoryGame.scoreNum == memoryGame.picNum / 2) {
@@ -76,6 +80,7 @@ memoryGame.clickCard = (event) => {
             x.style.opacity = '0'
             y.style.opacity = '0'
             $(x).click(memoryGame.clickCard);
+            $(y).click(memoryGame.clickCard);
         }
         w = 0;
     };
