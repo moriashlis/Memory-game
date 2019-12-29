@@ -62,11 +62,11 @@ memoryGame.clickCard = (event) => {
     memoryGame.moves++;
     memoryGame.score();
     if (w == 2) {
-        console.log(x.src);
-        console.log(y.src);
+        // console.log(x.src);
+        // console.log(y.src);
         
         if (x.src === y.src) {
-            console.log('yes');
+            // console.log('yes');
             
             memoryGame.scoreNum++;
             memoryGame.score();
